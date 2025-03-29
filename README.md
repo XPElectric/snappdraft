@@ -1,1 +1,599 @@
-# Snappdraft
+# Snappdraft Estimation Management System
+The digital backbone of XP Electric’s Estimating-as-a-Service (EaaS)—a comprehensive platform to automate, scale, and perfect electrical estimating workflows, designed for acquisition by industry leaders like Trimble, Tradehounds, SparxIQ, or KOJO. *Last Updated: March 09, 2025*
+
+## Vision
+- Evolve Snappdraft from a proposal generator into a full estimation management system.
+- Automate and centralize all aspects of the XPE estimating method—intake, scoping, job setup, takeoff, pricing, and review.
+- Target acquisition by construction tech firms, offering a robust, user-friendly platform with pre-built XPE processes and a gamified user experience.
+
+## Purpose
+- Automate the proposal generation process for XP Electric’s estimating services, replacing manual Excel workflows.
+- Centralize project data (scope, quotes, client info) for real-time collaboration and remote management.
+- Scale EaaS to handle multiple clients, industries, and project types with consistent, error-free outputs.
+
+## Key Features
+- **Estimation Workflow Management**: Guide users through the XPE method with structured, gamified levels (see Estimating Quest Levels below).
+- **Proposal Generator**: Auto-generate branded proposals from project inputs—scope, counts, quotes, pricing, and "below the line" costs.
+- **Client Portal**: Clients can upload bid docs, view EOE, track estimate status, and access reports (integrated with [xp-electric.com.md](xp-electric.com.md)).
+- **Data Integration**: Pull from centralized client and vendor databases for faster scoping (e.g., auto-fill client type, industry).
+- **Quote Tracking**: Real-time vendor quote management with auto-filled vendor info.
+- **Time Tracking Dashboard**: Monitor estimator hours (estimated, HTC, actual, % complete) across projects in real-time.
+- **Checklists**: Digital versions of scope, pre-bid, and critical path checklists with Y/N fields and date tracking.
+- **Labor Factor Calculator**: Automate NECA labor factor scoring to select the right Accubid labor column, based on [resources/tools/neca_calculator.xlsx](resources/tools/neca_calculator.xlsx).
+- **Pre-Bid/Pre-Takeoff Report**: Summarize project analysis to reduce meeting time, sent to clients as a courtesy.
+- **Post-Bid Report**: Detailed post-estimate analysis to enhance bid review efficiency.
+- **User Authentication**: Secure sign-in with role-based access and tiered pricing plans.
+
+## Estimating Quest Levels (Gamified Workflow)
+- **Theme**: Inspired by XP Electric’s gaming roots (e.g., Call of Duty-style font), the estimating process is structured as a series of levels, with a "final boss" bid review, to engage users while maintaining professionalism.
+- **Level 1: The Recon Mission (Intake)**  
+  - **Objective**: Gather intel—collect client and job details to start the quest.  
+  - **Tasks**:  
+    - Capture General Project Questions (e.g., project name, address, client info, due date).  
+    - Upload bid docs via the Client Portal.  
+    - Log initial request in Estimates > New Estimate.  
+  - **Features**: Client Portal, General Project Questions form, Estimates menu.  
+  - **Progress**: "Level 1 Cleared: Intel Secured!"
+- **Level 2: The Strategy Forge (Scope)**  
+  - **Objective**: Plan your attack—define the project scope and identify critical path items.  
+  - **Tasks**:  
+    - Complete Scope Questions and Critical Path Items checklists.  
+    - Use Pre-Bid Workflow Checklist to spot risks.  
+    - Generate Pre-Bid/Pre-Takeoff Report for the client.  
+  - **Features**: Scope Questions, Critical Path Items, Pre-Bid Workflow Checklist, Pre-Bid Report.  
+  - **Progress**: "Level 2 Cleared: Strategy Forged!"
+- **Level 3: The Armory Setup (Job Setup)**  
+  - **Objective**: Prepare your tools—set up the project for efficient takeoff.  
+  - **Tasks**:  
+    - Set Livecount views for schedules (e.g., Fixture Schedule, Panel Schedule) using the camera icon (see [estimating-process.md](estimating-process.md)).  
+    - Print panel schedules and prepare homerun sheets for cross-off tracking.  
+  - **Features**: Livecount integration, Estimates menu for digital cross-offs.  
+  - **Progress**: "Level 3 Cleared: Armory Ready!"
+- **Level 4: The Resource Hunt (Counts & Quote Requests)**  
+  - **Objective**: Gather resources—count materials and secure vendor quotes.  
+  - **Tasks**:  
+    - Tally fixtures, switchgear, etc., using Counts (integrated with Livecount views).  
+    - Generate QRs via Vendor Quote Tracker.  
+    - Use Switchgear Disconnects Tracker for disconnect details.  
+  - **Features**: Vendor Quote Tracker, Switchgear Disconnects Tracker, Counts inputs, Livecount integration.  
+  - **Progress**: "Level 4 Cleared: Resources Secured!"
+- **Level 5: The Battle Plan (Takeoff & Pricing)**  
+  - **Objective**: Execute the plan—perform takeoffs, price the job, adjust for complexity.  
+  - **Tasks**:  
+    - Conduct takeoffs with Ceiling Height & Type Analyzer, Specification Review Checklist, EOE Template.  
+    - Cross off panel schedule circuits as takeoffs are completed (digitized checkboxes in Estimates menu).  
+    - Document exceptions and "below the line" costs (e.g., unaccounted loads).  
+    - Apply NECA Labor Factor Score Sheet for Accubid labor column using [resources/tools/neca_calculator.xlsx](resources/tools/neca_calculator.xlsx).  
+    - Log time via Time Tracking Dashboard.  
+    - Finalize pricing in Accubid with quotes and labor adjustments.  
+  - **Features**: Ceiling Height & Type Analyzer, Specification Review Checklist, NECA Labor Factor Calculator, EOE Template, Time Tracking Dashboard, Accubid integration.  
+  - **Progress**: "Level 5 Cleared: Battle Plan Ready!"
+- **Level 6: The Final Boss – Bid Review Showdown (Review)**  
+  - **Objective**: Face the final boss—review the estimate, finalize the bid, deliver to the client.  
+  - **Tasks**:  
+    - Quality-check estimate using Internal Tracker (verify all panel schedule items accounted for).  
+    - Generate Post-Bid Report with bid summary, review notes, and "below the line" costs.  
+    - Produce Proposal Letter with scope, pricing, exclusions, and "below the line" costs.  
+    - Deliver marked-up drawings, scope doc, Accubid export via Client Portal.  
+  - **Features**: Internal Tracker, Post-Bid Report, Proposal Generator, Client Portal.  
+  - **Progress**: "Final Boss Defeated: Bid Delivered! Quest Complete!"
+
+## User Authentication
+- **Mechanism**: Auth0 for secure login with email/password and optional multi-factor authentication (MFA).
+- **Roles**:
+  - **Estimator**: Access to estimate creation, takeoff tools, and report generation.
+  - **Admin**: Manage users, settings, and billing.
+  - **Client**: Limited access to view estimates, reports, and upload bid docs via a portal.
+- **Security**: Encrypted data, session timeouts, role-specific permissions.
+
+## Pricing Plans
+- **Free Tier**:
+  - **Features**: Basic estimate creation (up to 2 projects/month), Ceiling Height & Type Analyzer, limited Specification Review Checklist, basic Pre-Bid Report, Levels 1-3 access.
+  - **Purpose**: Attract new users, showcase core functionality.
+  - **Limitations**: No advanced tools (e.g., Switchgear Disconnects Tracker), no Post-Bid Report, no Levels 4-6 access.
+  - **Price**: $0/month.
+- **Paid Tier**:
+  - **Features**: Unlimited projects, full access to all analyzers, Pre-Bid and Post-Bid Reports, vendor quote tracking, EOE Template automation, Levels 1-6 access, and use of [resources/tools/neca_calculator.xlsx](resources/tools/neca_calculator.xlsx).
+  - **Purpose**: Serve small to medium contractors needing robust tools.
+  - **Limitations**: Single-user license, basic support, no custom integrations.
+  - **Price**: $99/month or $990/year (10% discount).
+- **Premium Tier**:
+  - **Features**: All Paid features plus multi-user licenses, custom integrations (e.g., Accubid), priority support, advanced analytics (e.g., Competitiveness Reports), API access, custom level notifications.
+  - **Purpose**: Target large firms or EaaS clients, positioning for enterprise adoption.
+  - **Limitations**: Custom pricing based on user count and integration needs.
+  - **Price**: Starts at $299/month (scalable) or custom enterprise quote.
+- **Note**: For subscription details and sign-up, refer to [xp-electric.com.md](xp-electric.com.md).
+
+## Menu Options
+- **Dashboard**: Overview of active estimates, time tracking, project status (e.g., % Complete, HTC), and current Estimating Quest Level.
+- **Settings**: User profile management, plan upgrades, notification preferences, system configurations.
+- **Clients**: Client database with contact info, project history, permission settings for portal access.
+- **Vendors**: Vendor directory with quote tracking, contact details, performance metrics.
+- **Estimates**: Start and manage estimates—initiates the XPE method as Estimating Quest Levels.
+  - **Sub-Options**: New Estimate (Level 1), Ongoing Estimates (Levels 2-5), Completed Estimates (Level 6).
+- **Reports**: Generate and view Pre-Bid/Pre-Takeoff Reports and Post-Bid Reports.
+  - **Sub-Options**: Pre-Bid Report, Post-Bid Report, Custom Reports (Premium only).
+- **Tools**: Access to analyzers (Ceiling Height & Type, Specification Review, Switchgear Disconnects), EOE Template, NECA Labor Factor Calculator linked to [resources/tools/neca_calculator.xlsx](resources/tools/neca_calculator.xlsx).
+- **Support**: Help center, FAQs, contact for support (Premium includes priority access).
+
+## UI Wireframes
+### 1. Dashboard Wireframe
+- **Purpose**: Provide a high-level overview of active estimates, time tracking, project status, and the user’s current Estimating Quest Level, including a new Bid Log tab.
+- **Layout**:
+  - **Header**: Snappdraft logo (placeholder), user profile (top-right), navigation menu (Dashboard, Settings, Clients, Vendors, Estimates, Reports, Tools, Support, Bid Log).
+  - **Left Sidebar**: Progress tracker for Estimating Quest Levels (e.g., "Level 3: Armory Setup – In Progress").
+    - Visual: Vertical progress bar with 6 segments (Levels 1-6), each labeled with level name (e.g., "Level 1: Recon Mission – Cleared").
+    - Current level highlighted in green, completed levels in gray, upcoming levels in light gray.
+  - **Main Content**:
+    - **Tabs** (top): Dashboard (default), Bid Log, Time Tracking Summary.
+    - **Bid Log Tab**:
+      - Table: List of active bids with columns (Estimate Name/Number, Bid Date, Review Date, Client Name, Assigned Estimator, Status, HTC, % Complete).
+      - Example Row: "C001-E001-2025 | 2025-01-29 | 2025-02-01 | Geisler Electric | Estimator 1 | Pending | 20 hrs | 0%".
+      - Color Coding:
+        - Green: Review Date > 3 days away and % Complete > 50%
+        - Yellow: Review Date within 3 days or % Complete < 50% but progressing
+        - Red: Review Date past due or HTC exceeded with low % Complete
+      - Filters: Dropdowns for Client Name (e.g., Geisler Electric) and Status (e.g., Pending, Bidding).
+      - Refresh: Auto-updates every 10 minutes.
+    - **Time Tracking Summary** (right, when Dashboard tab active):
+      - Total hours logged this week across all projects.
+      - Pie chart: Breakdown of hours by project.
+  - **Footer**: Quick links to Support and FAQs.
+- **Notes**: The Bid Log tab provides real-time visibility for office display on a large TV, enhancing team coordination.
+
+### 2. Estimates Wireframe
+- **Purpose**: Allow users to start and manage estimates, guiding them through the Estimating Quest Levels.
+- **Layout**:
+  - **Header**: Same as Dashboard (Snappdraft logo, user profile, navigation menu).
+  - **Left Sidebar**: Same Quest Level progress tracker as Dashboard.
+  - **Main Content**:
+    - **Tabs** (top):
+      - "New Estimate" (Level 1), "Ongoing Estimates" (Levels 2-5), "Completed Estimates" (Level 6).
+    - **New Estimate Tab** (Level 1: Recon Mission):
+      - Form: General Project Questions (e.g., Project Name, Address, Client Info, Due Date).
+      - File Upload: "Upload Bid Docs" button (drag-and-drop area).
+      - Button: "Start Quest" (initiates Level 1).
+    - **Ongoing Estimates Tab** (Levels 2-5):
+      - Table: List of ongoing projects with columns (Project Name, Current Level, Next Task, Due Date).
+      - Example Row: "Smith Retail Project | Level 3: Armory Setup | Set Livecount Views | 03/15/2025".
+      - Clickable rows to open the project and continue the current level’s tasks (e.g., Livecount view setup for Level 3).
+      - Level-Specific Tasks: Each project shows a checklist of tasks for the current level (e.g., Level 3: "Set Livecount Views [ ]", "Prepare Homerun Sheets [ ]").
+    - **Completed Estimates Tab** (Level 6):
+      - Table: List of completed projects with columns (Project Name, Final Cost, Delivery Date).
+      - Example Row: "Jones Office Project | $50,000 | 03/01/2025".
+      - Downloadable deliverables (e.g., Proposal Letter, Post-Bid Report).
+  - **Footer**: Same as Dashboard.
+- **Notes**: The tabbed structure ensures users can easily navigate between starting new estimates and managing ongoing ones, with level-specific tasks clearly outlined (e.g., Livecount view setup).
+
+### 3. Reports Wireframe
+- **Purpose**: Enable users to generate and view Pre-Bid/Pre-Takeoff and Post-Bid Reports, tied to the Estimating Quest Levels.
+- **Layout**:
+  - **Header**: Same as Dashboard.
+  - **Left Sidebar**: Same Quest Level progress tracker.
+  - **Main Content**:
+    - **Tabs** (top):
+      - "Pre-Bid Report" (Level 2), "Post-Bid Report" (Level 6), "Custom Reports" (Premium only).
+    - **Pre-Bid Report Tab** (Level 2: Strategy Forge):
+      - Dropdown: Select project (e.g., "Smith Retail Project").
+      - Preview: Auto-populated Pre-Bid Report sections (Project Overview, Scope Summary, Specification Review, QRs, Hour Estimate, Next Steps).
+      - Button: "Generate PDF" (downloads report with XP Electric branding).
+    - **Post-Bid Report Tab** (Level 6: Final Boss):
+      - Dropdown: Select completed project (e.g., "Jones Office Project").
+      - Preview: Auto-populated Post-Bid Report sections (Bid Summary, Takeoff Details, Review Notes, "Below the Line" Costs, Performance Metrics).
+      - Button: "Generate PDF" (downloads report, interactive elements for Premium users).
+    - **Custom Reports Tab** (Premium only):
+      - Form: Select data fields to include (e.g., labor hours, material costs, win/loss likelihood).
+      - Button: "Create Custom Report" (generates downloadable PDF).
+  - **Footer**: Same as Dashboard.
+- **Notes**: Reports are tied to specific levels (Pre-Bid at Level 2, Post-Bid at Level 6), reinforcing the gamified workflow while providing practical functionality.
+
+## Inputs
+### General Project Questions (from [scope.md](scope.md))
+- Project name? (Text)  
+- Project street address? (Text)  
+- Project city, state, and zip? (Text)  
+- Client company name? (Text or Dropdown—preloaded clients)  
+- Client type? (Dropdown: Electrical Contractor, Electrical Engineer, Mechanical Engineer, General Contractor, Developer, Owner)  
+- Client company street address? (Text, auto-filled if client selected)  
+- Client company city, state, and zip? (Text, auto-filled if client selected)  
+- Client company contact name? (Text, auto-filled if client selected)  
+- Client company contact email? (Text, auto-filled if client selected)  
+- Client company contact phone? (Text, auto-filled if client selected)  
+- Estimate due date? (Date Picker)  
+- Estimate due date time? (Time Picker)  
+- Estimate due date time zone? (Dropdown: PST, MST, CST, EST)  
+- What is the name of the architect, address, city, state, zip? (Text)  
+- What is the name of the electrical engineer, address, city, state, zip? (Text)  
+- What is the date of the construction drawings? (Date Picker)  
+- What is the name of the drawing set? (Text)  
+- What are the sheet numbers included in the takeoff for the proposal? (Textarea)  
+- How many takeoff drawings are included in the takeoff for the proposal? (Number)  
+- What is a short description of the project and scope of work? Intro? (Textarea)  
+- Industry? (Dropdown: Commercial & Retail, Correctional & Judicial, Distribution, Education, Government & Military, Healthcare & Biotech, Hospitality & Entertainment, Industrial & Water Treatment, Mission Critical, Multi-Unit Residential, Single Family Residential, Renewable Energy, Transportation)  
+- Delivery method? (Dropdown: Hard Bid, Budget, Design Build, OPCC)  
+- Project type? (Dropdown: Ground-Up, Tenant Improvement)  
+- Construction type? (Dropdown: IA, IB, IIA, IIB, IIIA, IIIB, IV, VA, VB)  
+- Occupancy classification? (Dropdown: Assembly - Groups A-1, A-2, A-3, A-4 and A-5, Business - Group B, Educational - Group E, Factory and Industrial - Groups F-1 and F-2, High Hazard - Groups H-1, H-2, H-3, H-4, and H-5, Institutional - I-1, I-2, I-3, and I-4, Mercantile - Group M, Residential - Groups R-1, R-2, R-3, and R-4, Storage - Groups S-1 and S-2, Utility and Miscellaneous - Group U, Unknown)  
+- What is the area of the project if applicable, sq. ft.? (Number)  
+- What are the number of units/rooms/etc.? (Number)  
+- What are the number of levels, basement, 1st, 2nd, etc.? (Number)  
+- Are you sending this proposal to multiple clients? (Checkbox: Yes/No → multi-client fields)  
+- What are the ceiling types and heights of the project? (Textarea or Multi-Select + Numbers—see Ceiling Height & Type Analyzer)  
+- What are the critical path items to be quoted? (Checkbox: See list below)  
+
+### Critical Path Items (from [scope.md](scope.md))
+- **Materials**:  
+  - Light Fixtures (Spec Number, Manufacturer, Equals, Includes: Parking Lot Lighting, etc.)  
+  - Lighting Control Devices (Spec Number, Manufacturer)  
+  - Switchgear (Spec Number, Includes: Switchboards, Meter Mains, MCC, etc.)  
+  - Generator & ATS/MTS (Spec Number, Generator Size, Fuel Type, etc.)  
+  - UPS & Batteries (Spec Number)  
+  - Floor Boxes (Spec Number)  
+  - Wall Boxes (Spec Number)  
+  - Cable Tray (Spec Number)  
+  - Power Poles (Spec Number)  
+- **Subcontractors**:  
+  - Access Control (Spec Number, Manufacturer, Devices per Plans, etc.)  
+  - Audio Video (Spec Number, Manufacturer, AV Equipment Included, etc.)  
+  - Camera/CCTV (Spec Number, Manufacturer, EIZ or Fixed B&W, etc.)  
+  - Concrete (Spec Number)  
+  - Coring (Spec Number)  
+  - Directional Boring (Spec Number)  
+  - Excavation, Backfill, and Compaction (Spec Number)  
+  - Fire Alarm (Spec Number, Manufacturer, System Details, etc.)  
+  - Lightning Protection (Spec Number)  
+  - Nurse Call (Spec Number, Manufacturer, Devices per Plans, etc.)  
+  - Sawcutting, Removal, and Patch (Spec Number)  
+  - Security (Spec Number, Manufacturer, Devices per Plans, etc.)  
+  - Telecommunications (Spec Number, Manufacturer, Backbone Details, etc.)  
+  - Trenching (Spec Number)  
+  - 3rd Party Testing (Spec Number)  
+
+### Vendor Quote Tracker (from [scope.md](scope.md))
+- Item Description: (e.g., Light Fixtures)  
+- Vendor Company: (e.g., BrightStar Suppliers, auto-filled from database)  
+- Contact Name: (e.g., John Smith, auto-filled)  
+- Contact Phone: (e.g., 555-987-6543, auto-filled)  
+- Quoted Items:  
+  - Line Item 1: (e.g., 20 LED Panels - $1,200)  
+  - Line Item 2: (e.g., 15 Wall Sconces - $750)  
+- Status: (e.g., Quote Received Y/N - Yes, Date: 03/10/2025)  
+- Notes: (e.g., Confirmed lead time of 2 weeks)  
+
+### Pre-Bid Workflow Checklist (from [pre-bid.md](pre-bid.md))
+- Attended Pre-Bid Meeting: (Y/N, Attach Notes)  
+- Confirmed Receipt of All Bidding Documents: (Y/N)  
+- Reviewed General and Special Conditions: (Y/N)  
+- Identified All Systems: (Y/N)  
+- Scheduled Pursuit Strategy Meeting: (Y/N, Date: ____)  
+- Contacted Estimator for GC: (Y/N)  
+- Reviewed Bid Form and Estimate Software: (Y/N)  
+- Reviewed Specifications: (Y/N—see Specification Review Checklist)  
+- Permit Required: (Y/N)  
+- Bid Bond Required: (Y/N)  
+- Reviewed Applicable Wage Scales or Zone Pay: (Y/N)  
+- Performance Bond Required: (Y/N)  
+- Reviewed Site and Civil Drawings: (Y/N)  
+- BIM, Engineering, or Coordination Drawing Requirements: (Y/N, Text)  
+- Prevailing Wage Requirements: (Y/N)  
+- Liquidated Damages: (Y/N)  
+- Sales Tax Rate: (Y/N, Text)  
+- Full-Time Safety Rep Required: (Y/N)  
+- Commissioning Requirements: (Y/N, Text)  
+- Schedule Reviewed and Duration Listed on Bid Summary: (Y/N)  
+- Shift or Overtime Required to Meet Schedule, Material Deliveries, or Cut Overs: (Y/N)  
+- Architectural/Structural Review: (Y/N, Text)  
+- Labor and Material Escalation Included if Required: (Y/N)  
+- Excessive Labor Factor (Multiple Floor, High Rise, Heavy Industrial, etc.): (Y/N)  
+- One-Line Diagram Reviewed for Constructability: (Y/N)  
+- Motor Schedules Reviewed (Responsibility Matrix): (Y/N)  
+- Special Material or Systems Considered (Standby Power, UPS, Paralleling Gear): (Y/N, Text)  
+- Quotes Requested for Power, Lighting, Fire Alarm, and Special Systems, etc.: (Y/N)  
+- Subcontractors’ Proposals and Scopes Reviewed: (Y/N)  
+- Material Representatives Contacted (Teaming): (Y/N)  
+- Conduit and Wire Pricing Compared to Hot Sheet or Buy Pricing: (Y/N)  
+- General Conditions Reviewed on End Sheet: (Y/N)  
+- Temporary Power and Lighting Requirements Considered: (Y/N)  
+- Did You Consider Lifts, Site Vehicles, Special Tools, or Other Equipment Rentals: (Y/N)  
+- Storage Required On or Off Site: (Y/N, Text)  
+- Prefab Opportunities Considered (Discussed with Operations or Chief): (Y/N)  
+- Special Clean-Up Requirements: (Y/N, Text)  
+- Rigging Required or Forklifts for Material Handling: (Y/N)  
+- Have Circuit and Plug Numbers Been Finalized and Added to the End Sheet: (Y/N)  
+- Building Square Foot Inserted in Summary: (Y/N)  
+- Has Scope Letter Been Developed (Reviewed with GC on Phone Call): (Y/N)  
+- Received All Addendums and Noted Dates on Proposal Letter: (Y/N)  
+- Are Exclusions and Clarifications Clearly Identified: (Y/N)  
+- Have Voluntary Alternates Been Considered: (Y/N)  
+- Have Exceptions to the Specifications Been Noted Clearly in Proposal: (Y/N)  
+- Have All RFIs Been Submitted and Answered: (Y/N)  
+- Scheduled Estimate Review Meeting with Chief Estimator 24 Hours in Advance: (Y/N, Date: ____)  
+- Send Proposal Letter 24 Hours in Advance of Bid: (Y/N, Date: ____)  
+
+### NECA Labor Factor Score Sheet
+- **Purpose**: Assess project conditions to determine the appropriate labor column in Accubid for accurate pricing (Normal, Difficult, Very Difficult).
+- **Scoring Logic**:  
+  - Score each condition from 1 (normal) to 5 (most difficult).  
+  - Total Score Ranges:  
+    - 36–75: Use Normal column in Accubid.  
+    - 76–134: Use Difficult column in Accubid.  
+    - 135–175: Use Very Difficult column in Accubid.  
+- **Inputs**:  
+  - Working Conditions: (Dropdown: Indoor, Controlled Environment, Extreme Conditions)  
+  - Working Height: (Dropdown: Up to 10', 10'-20', 20'+, Ladders/Lifts/Scaffold, Below Grade)  
+  - Building Height: (Dropdown: 1-3 Floors, 4-7 Floors, High-Rise)  
+  - Building Sq. Ft.: (Dropdown: Manageable, Moderate, Excessive)  
+  - Project Size in Dollars: (Dropdown: Normal, Moderate, Extreme)  
+  - Site Size: (Dropdown: Urban Setting, Ample Laydown Space)  
+  - Job Conditions: (Dropdown: New Construction, Remodel, Work While Occupied)  
+  - Type of Construction: (Dropdown: Frame, Block, Concrete or Exposed)  
+  - Hours Worked: (Dropdown: 40 hours/week; 5, 6, or 7 day work week; 8, 10, or 12 hour work day)  
+  - Shifts: (Dropdown: Day, 2nd, 3rd)  
+  - Crew Density: (Dropdown: Normal, Moderate, Extreme)  
+  - Project Duration: (Dropdown: Normal, Compressed, Delayed, Fast Track)  
+  - Safety: (Dropdown: Standard OSHA Guidelines, Customer Directives, Project Specific)  
+  - Clean-Up: (Dropdown: Routine, No Dust, Clean Room Condition)  
+  - Installation: (Dropdown: Repetitive, Moderate Repetitive, No Repetition)  
+  - Systems: (Dropdown: Common Systems, Special, Complex)  
+  - Conduit Type: (Dropdown: PVC, EMT, Flex or GRC, IMC, Aluminum, PVC Coated GRC—see Specification Review Checklist)  
+  - Accessibility of Work Area: (Dropdown: Unlimited, Limited, Escorted)  
+  - Voltage: (Dropdown: 0-600V, 600-5kV, Over 5kV)  
+  - Inventory of Local Supplier: (Dropdown: Adequate, Moderate, Limited)  
+  - Proximity of Stored Materials: (Dropdown: On Site, In General Area of Project, Remote)  
+  - Project Continuity: (Dropdown: Interruptions: None, Moderate, Extreme)  
+  - Construction: (Dropdown: Standard, Poor, None)  
+  - Drawings/Plans: (Dropdown: % Complete: 100%, 95%, 50%, 35%, Less)  
+  - Information: (Dropdown: Timely, Delayed, Limited)  
+  - Change Order Quantity/Timing: (Dropdown: Minimal, Moderate, Excessive/Prior to Installation, During, After)  
+  - Craft Coordination Required: (Dropdown: Minimum, Moderate, Extensive)  
+  - Authority Having Jurisdiction: (Dropdown: Experience with Type of Project: Considerable, Moderate, Limited)  
+  - Decision Making: (Dropdown: Timely, Delayed, Limited)  
+  - BIM Building Integrated Modeling: (Dropdown: General/Owner Uses BIM Proactively, Moderately Proactive, Just Used to Satisfy a Contract Condition)  
+  - Project Schedule: (Dropdown: As Planned, Compressed/Extended, Moderately, Extreme)  
+  - General Contractors on Same Jobsite: (Dropdown: Single Prime, Two Primes, Three+ Primes)  
+  - Job Meetings: (Dropdown: Regularly Scheduled, Crisis Meetings, Minimal)  
+  - Shared Responsibility for Project: (Dropdown: One EC, Two ECs, Three+ ECs on Site)  
+  - Tools/Equipment: (Dropdown: Standard, Non-Standard, Specialty)  
+  - Labor Availability: (Dropdown: Readily, Moderately, Limited, Non-Available)  
+- **Output**:  
+  - Total Score: (Calculated, e.g., 36–175)  
+  - Accubid Labor Column: (Auto-selected: Normal, Difficult, Very Difficult)  
+- **Integration**: Auto-calculate score based on inputs, feed into Proposal Generator pricing, using data from [resources/tools/neca_calculator.xlsx](resources/tools/neca_calculator.xlsx).
+
+### Time Tracking Dashboard
+- **Purpose**: Provide a high-level view of estimator time across projects—estimated hours, projected Hours to Complete (HTC), actual hours spent, and percent complete—for efficient management of multiple estimators.
+- **Inputs**:  
+  - **Estimated Hours**: Total hours forecasted for the estimate (e.g., from EOE, Text: 20 hours).  
+  - **Time Log Entry**:  
+    - Date: (Date Picker, e.g., 03/09/2025)  
+    - Time In: (Time Picker, e.g., 08:00 AM)  
+    - Time Out: (Time Picker, e.g., 12:00 PM)  
+    - Task Description: (Text, e.g., “Takeoff for lighting fixtures”)  
+    - Duration: (Auto-calculated, e.g., 4 hours)  
+  - **Actual Hours Spent**: Sum of durations from Time Log entries (Auto-calculated, e.g., 10 hours).  
+  - **Projected Hours to Complete (HTC)**: Estimated Hours minus Actual Hours Spent (Auto-calculated, e.g., 10 hours remaining).  
+  - **Percent Complete**: (Actual Hours Spent / Estimated Hours) * 100 (Auto-calculated, e.g., 50%).  
+  - **Assigned Estimator**: (Dropdown: Estimator 1, Estimator 2, Estimator 3, Estimator 4).  
+- **Dashboard View**:  
+  - Project Name: (Text, e.g., “Smith Retail Project”)  
+  - Assigned Estimator: (Text, e.g., “Estimator 1”)  
+  - Estimated Hours: (Text, e.g., 20 hours)  
+  - Actual Hours Spent: (Text, e.g., 10 hours)  
+  - Projected Hours to Complete (HTC): (Text, e.g., 10 hours)  
+  - Percent Complete: (Text, e.g., 50%)  
+  - Current Task: (Text, e.g., “Takeoff for lighting fixtures”—last logged task)  
+  - Visual Cues:  
+    - Green: On track (HTC aligns with schedule).  
+    - Yellow: At risk (HTC exceeds expected progress).  
+    - Red: Overdue (HTC indicates delay).  
+- **Features**:  
+  - Filter by estimator to see individual workloads.  
+  - Sort by Percent Complete or HTC to prioritize projects.  
+  - Drill-down to view detailed Time Log entries per project.  
+- **Integration**: Feeds into Internal Tracker (below) and billing calculations ($95/hour rate).
+
+### EOE Template (Estimate of Estimate)
+- **Purpose**: Internal document to review project estimation requests, document scope per sheet, and propose a cost to the client based on projected Hours to Complete (HTC).
+- **Name Suggestions**:  
+  - Project Estimation Brief (PEB)  
+  - Estimation Scope Assessment (ESA)  
+  - Bid Readiness Report (BRR)  
+  - *Note*: Open for feedback—current “EOE” can stay or evolve.  
+- **Inputs**:  
+  - **Base Tasks**:  
+    - Job Setup: (Text, e.g., 15 hours—includes Livecount view setup and panel schedule prep)  
+    - Proposal: (Text, e.g., 30 hours)  
+    - Bid Review Meeting: (Text, e.g., 30 hours)  
+  - **Specification Review**: (Text, e.g., 0 hours—see Specification Review Checklist)  
+  - **Demolition**:  
+    - Electrical Demo: (Text, e.g., 0 hours)  
+    - Fire Alarm Demo: (Text, e.g., 0 hours)  
+    - Communications Demo: (Text, e.g., 0 hours)  
+  - **Fixtures**:  
+    - Fixture Counts: (Text, e.g., 0 hours)  
+    - Fixture QR: (Text, e.g., 0 hours)  
+    - Fixture Takeoff: (Text, e.g., 0 hours—adjusted by Ceiling Height & Type Analyzer)  
+  - **Switchgear & Feeders**:  
+    - Switchgear Counts: (Text, e.g., 0 hours)  
+    - Switchgear QR: (Text, e.g., 0 hours)  
+    - Switchgear Takeoff: (Text, e.g., 0 hours)  
+    - Feeder Takeoff: (Text, e.g., 0 hours—adjusted by Specification Review Checklist)  
+  - **Wiring Devices**:  
+    - Device Counts: (Text, e.g., 0 hours)  
+    - Device Takeoff: (Text, e.g., 0 hours)  
+  - **Branch Wiring**:  
+    - Branch Wiring Takeoff: (Text, e.g., 0 hours—adjusted by Ceiling Height & Type Analyzer and Specification Review Checklist)  
+  - **Communications**:  
+    - Communications Counts: (Text, e.g., 0 hours)  
+    - Communications Branch: (Text, e.g., 0 hours)  
+  - **Fire Alarm**:  
+    - FA Device Counts: (Text, e.g., 0 hours)  
+    - FA Conduit Pathways: (Text, e.g., 0 hours)  
+    - FA Branch Wiring: (Text, e.g., 0 hours)  
+  - **Sheet-Specific Hours**: (Text, e.g., 0 hours for Sheet 1–30, adjustable per project)  
+- **Outputs**:  
+  - Sub-Totals: Sum of hours per task category and sheet (e.g., Base: 75 hours, Sheets 1–30: 0 hours each).  
+  - Actual Hours: Total hours logged to date (e.g., 1.5 hours).  
+  - Actual Cost: Actual Hours * $65/hour (e.g., $97.50).  
+  - Proposed Hours: Projected HTC based on scope complexity (e.g., 3.0 hours).  
+  - Proposed Cost: Proposed Hours * $95/hour (e.g., $285.00).  
+  - Manual Hour Entry: Override for custom adjustments (e.g., $0.00).  
+  - Target Hours: Benchmark for efficiency (e.g., 1.5 hours).  
+  - Target Hourly Rate: Internal rate for cost analysis (e.g., $190.00).  
+- **Integration**:  
+  - Feeds into Time Tracking Dashboard for real-time updates of Actual Hours and Percent Complete.  
+  - Links to Proposal Generator for cost estimation in client proposals.  
+  - Auto-adjusts based on Pre-Bid Workflow Checklist, NECA Labor Factor scores, Ceiling Height & Type Analyzer, and Specification Review Checklist.
+
+### Ceiling Height & Type Analyzer
+- **Purpose**: Assess ceiling types, heights, and related structures to determine appropriate materials (e.g., fixtures, conduit) and adjust takeoff hours for accuracy.
+- **Inputs**:  
+  - Ceiling Type: (Dropdown: Open to Structure, Acoustical Grid, Hard Lid (Drywall))  
+  - Roof Structure: (Dropdown: Wood, Steel Webbing, Purlins)  
+  - Wall Types:  
+    - Exterior: (Dropdown: Concrete, Metal Beams, Wood/Drywall, Metal/Drywall)  
+    - Interior: (Dropdown: Concrete, Metal Beams, Wood/Drywall, Metal/Drywall)  
+  - Ceiling Height by Area: (Text or Number, e.g., “Lobby: 10’, Offices: 8’”)  
+  - Fixture Type Recommendation: (Auto-suggested: Pendant, 2x4 Troffers, etc.—based on ceiling type)  
+  - Conduit/Wiring Method: (Auto-suggested: Conduit, MC Cable—based on ceiling type and specs)  
+  - Support Wires Required: (Checkbox: Yes/No—e.g., No for hard lid with 2x4 troffers)  
+- **Outputs**:  
+  - Material Recommendation: (Text, e.g., “Pendant fixtures with conduit for open structure”)  
+  - Hour Adjustment: (Text, e.g., “+5 hours for conduit runs in high ceilings”)  
+  - Integration Note: Feeds into Fixture Takeoff and Branch Wiring Takeoff in EOE Template.  
+- **Integration**:  
+  - Links to EOE Template for hour adjustments.  
+  - Influences Proposal Generator for material specificity.  
+  - Syncs with Accubid for assembly adjustments.
+
+### Specification Review Checklist
+- **Purpose**: Ensure pre-takeoff understanding of project specifications to guide wiring methods and material choices.
+- **Inputs**:  
+  - Conduit Types: (Multi-Select: PVC, EMT, Flex or GRC, IMC, Aluminum, PVC Coated GRC, RGS/Rigid, PVC SCH 40, PVC SCH 80)  
+  - Minimum Conduit Sizes: (Text, e.g., “1/2” minimum”)  
+  - Color Coding for Systems: (Text, e.g., “Red for fire alarm”)  
+  - Fire Proofing Requirements: (Checkbox: Yes/No, Text for details)  
+  - Seismic Bracing: (Checkbox: Yes/No, Text for details)  
+  - Testing Requirements: (Checkbox: Yes/No, Text for details)  
+  - Gotcha Items: (Text, e.g., “Extra materials required”)  
+  - Spare Conduits: (Checkbox: Yes/No, Number if applicable)  
+  - Wiring Methods Allowed: (Multi-Select: Conduit, MC Cable, Romex, Open Wiring, etc.)  
+  - Underground Conduit Elbows: (Multi-Select: PVC Coated Rigid, PVC, GRC)  
+  - Stub-Through Conduit: (Multi-Select: PVC, Rigid, PVC Coated Rigid)  
+  - Feeder Cable Material: (Multi-Select: Copper, Aluminum)  
+  - Switchgear Bussing: (Multi-Select: Copper, Aluminum)  
+  - Feeder Routing: (Multi-Select: Overhead, Underground)  
+  - Feeder Method: (Multi-Select: Conduit and Wire, MC Cable, SER Cable)  
+- **Outputs**:  
+  - Specification Summary: (Text, e.g., “EMT and PVC SCH 40 conduit, copper feeders, overhead routing, MC cable allowed”)  
+  - Hour Adjustment: (Text, e.g., “+3 hours for seismic bracing review”)  
+- **Integration**:  
+  - Feeds into Pre-Bid Workflow Checklist and EOE Template.  
+  - Guides Ceiling Height & Type Analyzer, Switchgear Disconnects Tracker, and Proposal Generator.
+
+### Switchgear Disconnects Tracker
+- **Purpose**: Document switchgear disconnects with detailed attributes to identify items supplied and/or installed by the electrical contractor, generate accurate switchgear QRs, create Accubid assemblies, and specify details in proposals.
+- **Inputs**:  
+  - Amperage: (Dropdown: e.g., 30A, 60A, 100A, 200A, 400A, 600A)  
+  - Voltage: (Dropdown: e.g., 120V, 208V, 240V, 480V, 600V)  
+  - Phase/Poles: (Dropdown: e.g., 1P/2P, 3P/3P, 3P/4P)  
+  - Fused/Non-Fused: (Dropdown: Fused, Non-Fused)  
+  - Fuse Size: (Text, e.g., 20A, 30A, 40A)  
+  - Fuse Type: (Dropdown: e.g., Time Delay, Fast Acting, Current Limiting)  
+  - NEMA Rating: (Dropdown: e.g., NEMA 1, NEMA 3R, NEMA 4, NEMA 12)  
+  - Tag/Label: (Text, e.g., “DS-01”, “Main Disconnect”)  
+  - Supplied by EC: (Checkbox: Yes/No)  
+  - Installed by EC: (Checkbox: Yes/No)  
+- **Outputs**:  
+  - Disconnect Summary: Table listing all disconnects with attributes for proposal clarity (e.g., “200A, 480V, 3P/3P, Fused, 30A Time Delay, NEMA 3R, Tag: DS-01, Supplied/Installed by EC: Yes/Yes”).  
+  - Switchgear QR: Auto-generated with disconnect details for vendor requests.  
+  - Accubid Assembly: Naming convention based on attributes (e.g., “DISC-200A-480V-3P3P-FUSED-NEMA3R”) and assembly creation.  
+- **Integration**:  
+  - Feeds into Switchgear Counts, Switchgear QR, and Switchgear Takeoff in EOE Template.  
+  - Links to Proposal Generator for inclusion in Scope of Work.  
+  - Syncs with Accubid for assembly database updates.
+
+## Pre-Bid/Pre-Takeoff Report
+- **Purpose**: Summarize initial project analysis to reduce physical/tele pre-bid meeting time, sent to clients as a courtesy.
+- **Content**:
+  - **Project Overview**: Name, address, client, industry, delivery method, construction type, occupancy classification.
+  - **Scope Summary**: Key systems identified (e.g., lighting, switchgear), critical path items, and assumptions.
+  - **Specification Review**: Allowed cables (e.g., MC, Romex), conduit types (e.g., EMT, PVC SCH 40), feeder details (e.g., copper, overhead), gotcha items.
+  - **Quote Requests (QRs)**: List of requested quotes (e.g., fixtures, switchgear) with vendors contacted.
+  - **Hour Estimate**: Proposed Hours to Complete (HTC) from EOE Template, cost at $95/hour.
+  - **Next Steps**: Suggested actions (e.g., “Review specs, confirm QRs by March 15, 2025”).
+- **Format**: PDF export with XP Electric branding, client-specific data.
+- **Delivery**: Email or client portal download (see [xp-electric.com.md](xp-electric.com.md) for Client Portal details).
+- **Free Tier**: Basic version with limited data.
+- **Paid/Premium**: Full details, customizable fields.
+
+## Post-Bid Report
+- **Purpose**: Detailed post-estimate analysis to enhance bid review efficiency.
+- **Content**:
+  - **Bid Summary**: Final estimate cost, labor hours, material breakdown.
+  - **Takeoff Details**: Marked-up drawings, scope of work highlights.
+  - **Review Notes**: Adjustments for addendums, RFI responses, and exclusions.
+  - **Below the Line Costs**: Exceptions identified (e.g., unaccounted loads, estimated costs outside base bid).
+  - **Performance Metrics**: Time spent vs. HTC, win/loss likelihood.
+- **Format**: PDF with XP Electric branding, interactive elements (Premium).
+- **Delivery**: Email or client portal (see [xp-electric.com.md](xp-electric.com.md) for Client Portal details).
+- **Availability**: Paid and Premium tiers only.
+
+## Outputs
+- **Proposal Letter**: Auto-generated PDF with:  
+  - Project Overview: Name, client, scope description, industry, construction type, occupancy classification.  
+  - Scope of Work: Detailed breakdown from critical path items, including switchgear disconnects and ceiling-specific materials (e.g., “200A, 480V disconnects supplied and installed by EC; pendant fixtures with conduit for open ceilings; copper feeders in EMT conduit”).  
+  - Inclusions/Exclusions: Pulled from pre-bid checklist (e.g., “No warranty on client-furnished fixtures”).  
+  - Below the Line Costs: Exceptions outside base bid (e.g., “Lighting controls not shown, estimated $5,000”).  
+  - Pricing: Auto-calculated from Accubid data, vendor quotes, and NECA labor factor-adjusted rates ($95/hour base).  
+  - Addendum Notes: Dates and impacts listed.  
+- **EOE Report**: Auto-generated report with EOE Template data—proposed cost, HTC, and scope breakdown for client presentation.  
+- **Client Dashboard**: Real-time status updates (e.g., “In Takeoff,” “Awaiting Quotes,” “Proposal Sent”). See [xp-electric.com.md](xp-electric.com.md) for Client Portal details.  
+- **Internal Tracker**:  
+  - Project Name: (Text, e.g., “Smith Retail Project”)  
+  - Due Date: (Text, e.g., 03/15/2025)  
+  - Bid Review Date: (Text, e.g., 03/12/2025)  
+  - Assigned Estimator: (Text, e.g., “Estimator 1”)  
+  - Estimated Hours: (Text, e.g., 20 hours—from EOE)  
+  - Actual Hours Spent: (Text, e.g., 10 hours—from Time Tracking Dashboard)  
+  - Hours to Complete (HTC): (Text, e.g., 10 hours—from EOE and Time Tracking)  
+  - Percent Complete: (Text, e.g., 50%)  
+  - Notes: (Text, e.g., “Waiting on lighting fixture quotes”)  
+  - *Source*: Auto-updated from Time Tracking Dashboard.
+
+## Integration Points
+- **Accubid**: Import/export pricing data for materials, labor, and overhead; apply NECA labor factor scores to select labor column; create assemblies from Switchgear Disconnects Tracker and adjust for Ceiling Height & Type Analyzer and Specification Review Checklist.
+- **Client Database**: Auto-fill Client Type, Industry, Delivery Method, Project Type, Construction Type, and Occupancy Classification for historical analysis.
+- **Vendor Database**: Auto-fill vendor info in Quote Tracker and generate switchgear QRs from Disconnects Tracker.
+- **Billing System**: Calculate estimator costs ($95/hour) based on Actual Hours Spent from Time Tracking Dashboard.
+- **EOE Automation**: Link EOE Template to Time Tracking Dashboard, Proposal Generator, Disconnects Tracker, Ceiling Height & Type Analyzer, and Specification Review Checklist for real-time cost updates.
+
+## Tech Stack
+- **Framework**: Next.js for scalability and real-time features.
+- **Database**: PostgreSQL for structured data (clients, vendors, projects, labor factors, time logs, EOE data, switchgear disconnects, ceiling data, spec reviews, cable/conduit details).
+- **Hosting**: Vercel for fast deployment and scaling.
+- **Authentication**: Auth0 for secure login.
+- **File Storage**: AWS S3 for bid docs, reports, and proposals.
+- **API**: REST for third-party integrations (Accubid, etc.).
+
+## Next Steps
+- **Short-Term**: Record and edit the "Creating Views in Livecount" video (due March 16, 2025).
+- **Medium-Term**: Develop authentication and core menu options, prototype Pre-Bid Report, implement Estimating Quest Levels UI, and develop Bid Log tab for TV display (due March 30, 2025).
+- **Long-Term**: Build Premium features (multi-user, analytics), pitch to acquisition targets (due April 15, 2025).
+- Mock up a proposal generator UI—input forms, output preview.
+- Design client portal dashboard—upload, status, download sections.
+- Build a sample client database schema (Client Type, Industry, etc.).
+- Test auto-fill for Vendor Quote Tracker with dummy vendor data.
+- Design NECA Labor Factor Calculator UI—dropdowns, score display, Accubid column selection, linked to [resources/tools/neca_calculator.xlsx](resources/tools/neca_calculator.xlsx).
+- Mock up Time Tracking Dashboard UI—table view, filters, visual cues.
+- Design EOE Template UI—task inputs, cost calculator, sheet-specific fields.
+- Design Switchgear Disconnects Tracker UI—dropdowns, summary table, QR generation.
+- Design Ceiling Height & Type Analyzer UI—dropdowns, height inputs, material suggestions.
+- Design Specification Review Checklist UI—checkboxes, text fields, summary output.
+- Enhance Specification Review Checklist with cable and conduit detail tracking.
+
+## Action Items
+- **Immediate**: Review and approve the updated Snappdraft features with the Bid Log tab.
+- **Week 1**: Migrate Excel bid log to Snappdraft’s Internal Tracker and install TV display (due March 16, 2025).
+- **Week 2**: Implement Bid Log tab in Snappdraft Dashboard and test TV display (due March 23, 2025).
+- **Ongoing**: Refine reports based on client feedback, plan acquisition strategy.
