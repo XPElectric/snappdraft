@@ -5,6 +5,7 @@
 |---------|------------|--------|---------|
 | 1.0     | 2025-10-17 | Grok   | Initial draft based on project overview and attached documents (README, example bid proposal, current estimating sheet). |
 | 1.1     | 2025-10-17 | Grok   | Added #1: Davis-Bacon Wages Acknowledgment and Reference as a high-priority compliance feature, integrating with project intake, estimating, and proposal generation. |
+| 1.2     | 2025-10-17 | Grok   | Added Vendor and RFQ Management: Support for creating, managing, and emailing requests for quotes to vendors and subcontractors, integrated with the estimating workflow. |
 
 ## Introduction
 Snappdraft is a web-based electrical estimating management application designed to streamline the creation of estimating information sheets and automated bid proposals. It replaces the current estimating information sheet with a more dynamic, user-friendly system that captures data across key phases of the estimating process. The goal is to reduce manual effort, minimize errors, and generate professional proposals efficiently.
@@ -20,6 +21,7 @@ This requirements document outlines functional and non-functional requirements, 
 - Automated generation of bid proposals based on estimating data.
 - Basic reporting and export (PDF/Word for proposals).
 - Compliance features for regulations like Davis-Bacon Act (DBA).
+- Vendor and subcontractor management, including RFQ creation and email sending.
 
 ### Out of Scope (Initial Release)
 - Advanced integrations (e.g., ERP systems, QuickBooks).
@@ -75,6 +77,19 @@ This requirements document outlines functional and non-functional requirements, 
 - **FR-CR-01**: Auto-insert DBA flag details into Pre-Bid Report, Proposal Letter (Level 6), and Post-Bid Report under Review Notes for audit trail.
 - **FR-CR-02**: Tie DBA to project industry (e.g., "Government & Military" or "Public Infrastructure" in 1.5 Industry section from EIS.pdf).
 
+### 7. Vendor and RFQ Management
+- **FR-VQ-01**: Admins/Estimators can add/edit/delete vendors and subcontractors in a dedicated directory page.
+  - Vendors/Subcontractors: Name, contact info (multiple contacts with emails/phones), address, specialties (e.g., light fixtures, lighting controls, switchgear, cable tray, fire alarm, communications).
+  - Support for categorization (e.g., material suppliers vs. subcontractors).
+- **FR-VQ-02**: Within the estimating process (e.g., Phase 3: Materials), allow creation of RFQs for specific items or categories.
+  - Select project, add line items (description, quantity, specs), choose vendor(s) from directory (searchable dropdown).
+  - Template RFQ form: Include project details, due date, attachments (e.g., specs from estimate).
+- **FR-VQ-03**: Select one or more contacts per vendor and send RFQ emails directly via the app (integrate with email service like SendGrid).
+  - Email template: Professional format with project summary, RFQ details, response instructions (e.g., due by date, reply-to link).
+  - Track sent RFQs: Status (Sent, Received, Pending), responses (upload quotes as attachments or manual entry).
+- **FR-VQ-04**: Auto-populate RFQ data into estimates upon response (e.g., update material costs from vendor quotes).
+- **FR-VQ-05**: Dashboard view for RFQ tracking per project, with filters by vendor/status.
+
 ## Non-Functional Requirements
 - **NFR-PERF-01**: Page load < 2 seconds; handle up to 100 concurrent users.
 - **NFR-SEC-01**: Data encryption (HTTPS, stored passwords hashed); GDPR-compliant for client data.
@@ -92,15 +107,16 @@ This requirements document outlines functional and non-functional requirements, 
 | US-05 | All users | Searchable project list | I can find past work quickly | Medium |
 | US-06 | Admin | User roles | I can control access | Medium |
 | US-07 | Estimator | DBA compliance flag and auto-adjustments | I ensure legal bids and reduce disputes | High |
+| US-08 | Estimator | To create and send RFQs to vendors/subcontractors | I can gather accurate pricing quickly and integrate into estimates | High |
 
 ## Assumptions and Risks
-- **Assumptions**: Users have basic web proficiency; initial data migration from current sheet is manual.
-- **Risks**: Scope creep from custom templates—mitigate with MVP focus. Integration delays—start with core UI. DBA rate integrations (e.g., NECA) may require API access; assume manual uplift initially if needed.
+- **Assumptions**: Users have basic web proficiency; initial data migration from current sheet is manual. Email service integration (e.g., SMTP) is straightforward.
+- **Risks**: Scope creep from custom templates—mitigate with MVP focus. Integration delays—start with core UI. DBA rate integrations (e.g., NECA) may require API access; assume manual uplift initially if needed. Vendor email deliverability—use reputable service to minimize spam issues.
 
 ## Next Steps
-1. Review this updated draft and provide feedback (e.g., add/remove requirements or refine #1 details).
-2. Prioritize user stories for MVP, incorporating US-07.
-3. Prototype key UI flows (e.g., project creation with DBA prompt).
+1. Review this updated draft and provide feedback (e.g., add/remove requirements or refine RFQ details).
+2. Prioritize user stories for MVP, incorporating US-07 and US-08.
+3. Prototype key UI flows (e.g., project creation with DBA prompt, RFQ sending workflow).
 4. Add more detailed requirements (#2, etc.) as needed.
 
-This update firmly embeds DBA compliance as a cornerstone feature, enhancing Snappdraft's value for government and industrial bids while keeping the UI simple and conversational. It's a realistic step toward risk-free estimating—optimistically, this could differentiate us in acquisitions like Trimble. Ready for the next addition?
+This enhancement positions Snappdraft as a comprehensive estimating hub, streamlining vendor interactions to cut down on email chaos and boost accuracy—realistically, it'll pay off in faster turnarounds without overcomplicating the simple UI we've envisioned. What's next on the list?
