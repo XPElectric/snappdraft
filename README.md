@@ -2,7 +2,7 @@
 
 **Last Updated: October 17, 2025**
 
-Snappdraft is a web-based tool that replaces manual electrical estimating sheets (like the EIS.pdf) with a simple, conversational interface. It automates workflows for intake, scoping, takeoff, pricing, and proposal generation, tailored for XP Electric's Estimating-as-a-Service (EaaS). By centralizing client, engineering firm, and project data, it ensures error-free outputs and scales efficiently for multiple projects.
+Snappdraft is a web-based tool that replaces manual electrical estimating processes with a simple, conversational interface. It automates workflows for intake, scoping, takeoff, pricing, and proposal generation, tailored for XP Electric's Estimating-as-a-Service (EaaS). By centralizing client, engineering firm, and project data, it ensures error-free outputs and scales efficiently for multiple projects.
 
 ## Purpose
 - Streamline estimating from start to bid: Gather project details conversationally, track progress via checklists, and auto-generate branded proposals.
