@@ -36,6 +36,9 @@ Thumbs.db
 *.swp
 *.swo
 
+# Sensitive Files
+src/lib/firebase.js
+.env.local
+
 # Misc
-.env
 *.log
