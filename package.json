@@ -1,0 +1,8 @@
+{
+  "name": "snappdraft",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "firebase": "^12.4.0"
+  }
+}
