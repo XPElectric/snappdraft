@@ -7,7 +7,7 @@ export default function Home() {
         <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
           Get Started – Add a Project
         </button>
-        <p className="text-sm text-gray-500 mt-4">Responsive on any device – Desktop, tablet, or mobile.</p>
+        <p className="text-sm text-gray-500 mt-4">Responsive on any device – Desktop, tablet, or mobile.  Laptop Sync</p>
       </div>
     </main>
   );
