@@ -15,12 +15,24 @@
   <hr class="my-8 border-gray-300">
   <div id="authStatus" class="mt-4"></div>
   <script type="module">
-    import { auth } from './firebase-config.js';
-    import { signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js';
+    import { getAuth, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
+
+    const firebaseConfig = {
+      apiKey: "your-actual-api-key",  // Same real values as above
+      authDomain: "snappdraft.firebaseapp.com",
+      projectId: "snappdraft",
+      storageBucket: "snappdraft.appspot.com",
+      messagingSenderId: "123456789012",
+      appId: "1:123456789012:web:your-app-id"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
     onAuthStateChanged(auth, (user) => {
       if (!user) {
-        window.location.href = '/';  // Back to login
+        window.location.href = '/';
         return;
       }
       const statusDiv = document.getElementById('authStatus');

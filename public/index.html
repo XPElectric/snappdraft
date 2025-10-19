@@ -22,8 +22,20 @@
   </form>
   <p id="errorMsg" class="text-red-500 mt-4 hidden"></p>
   <script type="module">
-    import { auth } from './firebase-config.js';
-    import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js';
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
+
+    const firebaseConfig = {
+      apiKey: "your-actual-api-key",  // Replace with real from Firebase Console > Project Settings > Config
+      authDomain: "snappdraft.firebaseapp.com",
+      projectId: "snappdraft",
+      storageBucket: "snappdraft.appspot.com",
+      messagingSenderId: "123456789012",  // Real value
+      appId: "1:123456789012:web:your-app-id"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
 
     const form = document.getElementById('authForm');
     const email = document.getElementById('email');
@@ -33,7 +45,6 @@
     const errorMsg = document.getElementById('errorMsg');
     let isSignup = false;
 
-    // Toggle mode
     signupBtn.addEventListener('click', () => {
       isSignup = !isSignup;
       submitBtn.textContent = isSignup ? 'Sign Up' : 'Login';
@@ -52,14 +63,13 @@
         } else {
           await signInWithEmailAndPassword(auth, emailVal, passwordVal);
         }
-        window.location.href = '/dashboard';  // To app hub
+        window.location.href = '/dashboard';  // Redirect to app on success
       } catch (error) {
         errorMsg.textContent = error.message;
         errorMsg.classList.remove('hidden');
       }
     });
 
-    // Auto-redirect if already logged in
     onAuthStateChanged(auth, (user) => {
       if (user) window.location.href = '/dashboard';
     });
