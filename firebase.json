@@ -16,10 +16,6 @@
         "destination": "/modules/clients/index.html"
       },
       {
-        "source": "/projects",
-        "destination": "/modules/projects/index.html"
-      },
-      {
         "source": "**",
         "destination": "/index.html"
       }
