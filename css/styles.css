@@ -2,17 +2,38 @@ body {
     margin: 0; 
     font-family: Arial, sans-serif; 
     display: flex; 
-    background: #f4f4f4; 
+    background: #f8fafc; /* Neutral light bg for readability */
+    color: #1e293b; /* Dark text */
+}
+#site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: #1e3a8a; /* Primary blue for header */
+    z-index: 10;
+    padding: 0;
+    box-sizing: border-box;
+}
+#logo {
+    height: 40px; /* Compact for header fit */
+    width: auto;
+    padding: 10px 20px;
+    display: block;
+    float: left; /* Left-align in header */
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.8)); /* White glow for contrast on dark bg */
 }
 #sidebar { 
+    position: fixed;
+    top: 60px; /* Below header */
     width: 200px; 
-    background: #333; 
+    background: #1e3a8a; /* Primary for sidebar */
     color: white; 
     transition: width 0.3s; 
-    position: fixed; 
-    height: 100vh; 
+    height: calc(100vh - 60px); /* Full height minus header */
     overflow-y: auto; 
-    z-index: 1; 
+    z-index: 5; /* Below header */
 }
 #sidebar.collapsed { 
     width: 50px; 
@@ -27,22 +48,20 @@ body {
     text-decoration: none; 
     padding: 10px 15px; 
     display: block; 
-    white-space: nowrap; /* Prevents text wrap */
-    transition: padding 0.3s, visibility 0.3s; /* Smooth text fade-in */
+    white-space: nowrap; 
+    transition: padding 0.3s, visibility 0.3s, background 0.3s; 
 }
 #sidebar li a:hover { 
-    background: #555; 
+    background: #3b82f6; /* Secondary blue hover */
 }
-/* Hide text in collapsed state */
 #sidebar.collapsed li a { 
     visibility: hidden; 
-    padding: 10px 0; /* Centers vertically, no horizontal space */
+    padding: 10px 0; 
 }
-/* Show text on hover even when collapsed (optional accessibility) */
 #sidebar.collapsed li a:hover { 
     visibility: visible; 
     padding: 10px 15px; 
-    background: #555; 
+    background: #3b82f6; /* Secondary on hover */
 }
 #toggle-nav { 
     background: none; 
@@ -53,19 +72,32 @@ body {
     padding: 10px; 
     cursor: pointer; 
     transition: background 0.3s; 
+    display: block; /* Full-width button */
 }
 #toggle-nav:hover { 
-    background: #555; 
+    background: #3b82f6; /* Secondary hover */
 }
 #main-content { 
     margin-left: 200px; 
+    margin-top: 60px; /* Clear header */
     padding: 20px; 
     flex: 1; 
-    min-height: 100vh; 
+    min-height: calc(100vh - 60px); 
+    background: #f8fafc; /* Neutral body */
+    border-left: 1px solid #e2e8f0; /* Subtle divider */
 }
 #sidebar.collapsed ~ #main-content { 
     margin-left: 50px; 
 }
+h1, h2 {
+    color: #1e293b; /* Dark headings */
+}
 @media (max-width: 1280px) { 
-    body { zoom: 0.8; } /* Scale for smaller laptops, no true responsiveness */
+    body { zoom: 0.8; } /* Scale for smaller laptops */
+}
+
+/* Modular accent for future (e.g., Dashboard win rate) */
+.success-accent {
+    color: #10b981; /* Green for positive metrics */
+    font-weight: bold;
 }
