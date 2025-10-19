@@ -95,9 +95,98 @@ h1, h2 {
 @media (max-width: 1280px) { 
     body { zoom: 0.8; } /* Scale for smaller laptops */
 }
-
 /* Modular accent for future (e.g., Dashboard win rate) */
 .success-accent {
     color: #10b981; /* Green for positive metrics */
     font-weight: bold;
+}
+/* Engineers Module */
+#engineers-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+#engineers-table th, #engineers-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0; /* Light neutral */
+}
+#engineers-table th {
+    background: #1e3a8a; /* Primary */
+    color: white;
+}
+#engineers-table tr:hover {
+    background: #f8fafc; /* Neutral bg */
+}
+.btn-primary, .btn-secondary {
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+}
+.btn-primary {
+    background: #1e3a8a; /* Primary */
+    color: white;
+}
+.btn-primary:hover {
+    background: #3b82f6; /* Secondary */
+}
+.btn-secondary {
+    background: #e2e8f0; /* Light neutral */
+    color: #1e293b; /* Neutral text */
+}
+.btn-secondary:hover {
+    background: #cbd5e1;
+}
+#new-engineer {
+    float: right;
+    margin-bottom: 10px;
+}
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.modal-content h2 {
+    color: #1e293b; /* Neutral text */
+    margin-top: 0;
+}
+.modal-content label {
+    display: block;
+    margin: 10px 0;
+    color: #1e293b;
+}
+.modal-content input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+#engineer-modal {
+    display: none; /* Hidden by default */
 }
