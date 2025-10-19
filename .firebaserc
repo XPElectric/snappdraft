@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "snappdraft"
-  }
+    "default": "snappdraft",
+    "laptop": "snappdraft"
+  },
+  "targets": {},
+  "etags": {}
 }
