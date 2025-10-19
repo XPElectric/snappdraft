@@ -12,12 +12,12 @@
         "destination": "/index.html"
       },
       {
-        "source": "/login",
-        "destination": "/modules/auth/index.html"
-      },
-      {
         "source": "/clients",
         "destination": "/modules/clients/index.html"
+      },
+      {
+        "source": "/projects",
+        "destination": "/modules/projects/index.html"
       },
       {
         "source": "**",
