@@ -9,7 +9,7 @@
     "rewrites": [
       {
         "source": "/dashboard",
-        "destination": "/index.html"
+        "destination": "/dashboard.html"
       },
       {
         "source": "/clients",
@@ -18,10 +18,6 @@
       {
         "source": "/projects",
         "destination": "/modules/projects/index.html"
-      },
-      {
-        "source": "**",
-        "destination": "/modules/auth/index.html"
       }
     ]
   }

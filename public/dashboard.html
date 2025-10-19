@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Snappdraft Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style> body { max-width: 1200px; margin: 0 auto; padding: 20px; } </style>  <!-- Desktop-only -->
+</head>
+<body class="bg-gray-100">
+  <h1 class="text-3xl font-bold mb-4">Welcome to Snappdraft</h1>
+  <p class="mb-4">Streamline electrical estimating with conversational workflows. Add clients, gather project details, and generate proposals effortlessly.</p>
+  <p class="mb-4">Desktop-optimized for precise workflows on PCs and laptops.</p>
+  <a href="/clients" class="bg-blue-500 text-white px-6 py-2 rounded text-lg">Manage Clients</a>
+  <a href="/projects" class="bg-blue-500 text-white px-6 py-2 rounded text-lg ml-4">Create Projects</a>
+  <hr class="my-8 border-gray-300">
+  <div id="authStatus" class="mt-4"></div>
+  <script type="module">
+    import { auth } from './firebase-config.js';
+    import { signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
+
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = '/';  // Back to login
+        return;
+      }
+      const statusDiv = document.getElementById('authStatus');
+      statusDiv.innerHTML = '<button id="logout" class="bg-red-500 text-white px-4 py-2 rounded">Logout</button>';
+      document.getElementById('logout').addEventListener('click', async () => {
+        await signOut(auth);
+        window.location.href = '/';
+      });
+    });
+  </script>
+</body>
+</html>

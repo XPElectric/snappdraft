@@ -2,36 +2,67 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Snappdraft - Electrical Estimating</title>
+  <title>Snappdraft Login</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style> body { max-width: 1200px; margin: 0 auto; padding: 20px; } </style>  <!-- Desktop-only -->
-  <meta http-equiv="refresh" content="5;url=/login">  <!-- Fallback redirect if JS fails -->
 </head>
-<body class="bg-gray-100">
-  <h1 class="text-3xl font-bold mb-4">Welcome to Snappdraft</h1>
-  <p class="mb-4">Streamline electrical estimating with conversational workflows. Add clients, gather project details, and generate proposals effortlessly.</p>
-  <p class="mb-4">Desktop-optimized for precise workflows on PCs and laptops.</p>
-  <a href="/clients" class="bg-blue-500 text-white px-6 py-2 rounded text-lg">Manage Clients</a>
-  <hr class="my-8 border-gray-300">
-  <div id="authStatus" class="mt-4"></div>  <!-- Dynamic logout area -->
+<body class="bg-gray-100 p-8">
+  <h1 class="text-2xl font-bold mb-4">Snappdraft - Sign In to Start Estimating</h1>
+  <form id="authForm" class="space-y-4 max-w-md">
+    <div>
+      <label class="block text-sm font-medium">Email</label>
+      <input type="email" id="email" class="w-full p-2 border rounded" required>
+    </div>
+    <div>
+      <label class="block text-sm font-medium">Password</label>
+      <input type="password" id="password" class="w-full p-2 border rounded" required>
+    </div>
+    <button type="submit" id="submitBtn" class="bg-blue-500 text-white px-4 py-2 rounded">Login</button>
+    <button type="button" id="signupBtn" class="bg-green-500 text-white px-4 py-2 rounded ml-2">Sign Up</button>
+  </form>
+  <p id="errorMsg" class="text-red-500 mt-4 hidden"></p>
   <script type="module">
-  import { auth } from './firebase-config.js';
-  import { signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
+    import { auth } from './firebase-config.js';
+    import { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
 
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      window.location.href = '/login';  // Gate: Back to entry if unauth
-      return;
-    }
-    // Authenticated: Show logout
-    const statusDiv = document.getElementById('authStatus');
-    statusDiv.innerHTML = '<button id="logout" class="bg-red-500 text-white px-4 py-2 rounded">Logout</button>';
-    document.getElementById('logout').addEventListener('click', async () => {
-      await signOut(auth);
-      window.location.href = '/login';
+    const form = document.getElementById('authForm');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const submitBtn = document.getElementById('submitBtn');
+    const signupBtn = document.getElementById('signupBtn');
+    const errorMsg = document.getElementById('errorMsg');
+    let isSignup = false;
+
+    // Toggle mode
+    signupBtn.addEventListener('click', () => {
+      isSignup = !isSignup;
+      submitBtn.textContent = isSignup ? 'Sign Up' : 'Login';
+      signupBtn.textContent = isSignup ? 'Switch to Login' : 'Sign Up';
     });
-    console.log('Dashboard loaded for authenticated user');
-  });
-</script>
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorMsg.classList.add('hidden');
+      const emailVal = email.value;
+      const passwordVal = password.value;
+
+      try {
+        if (isSignup) {
+          await createUserWithEmailAndPassword(auth, emailVal, passwordVal);
+        } else {
+          await signInWithEmailAndPassword(auth, emailVal, passwordVal);
+        }
+        window.location.href = '/dashboard';  // To app hub
+      } catch (error) {
+        errorMsg.textContent = error.message;
+        errorMsg.classList.remove('hidden');
+      }
+    });
+
+    // Auto-redirect if already logged in
+    onAuthStateChanged(auth, (user) => {
+      if (user) window.location.href = '/dashboard';
+    });
+  </script>
 </body>
 </html>
