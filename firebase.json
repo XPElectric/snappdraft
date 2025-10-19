@@ -4,16 +4,16 @@
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
+        "source": "/login",
+        "destination": "/modules/auth/index.html"
+      },
+      {
         "source": "/clients",
         "destination": "/modules/clients/index.html"
       },
       {
         "source": "**",
         "destination": "/index.html"
-      },
-      { 
-        "source": "/login", 
-        "destination": "/modules/auth/index.html" 
       }
     ]
   }

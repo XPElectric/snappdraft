@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         await signInWithEmailAndPassword(auth, emailVal, passwordVal);
       }
-      window.location.href = '/';  // Redirect to home on success
+      window.location.href = '/';
     } catch (error) {
       errorMsg.textContent = error.message;
       errorMsg.classList.remove('hidden');

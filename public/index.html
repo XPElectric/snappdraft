@@ -14,4 +14,18 @@
   <hr class="my-8 border-gray-300">
   <script type="module"> console.log('Snappdraft landing loaded'); </script>
 </body>
+<!-- Add after <hr> in body -->
+<script type="module">
+  import { auth } from './firebase-config.js';
+  import { signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      document.body.innerHTML += `<button id="logout" class="bg-red-500 text-white px-4 py-2 rounded ml-4">Logout</button>`;
+      document.getElementById('logout').addEventListener('click', () => signOut(auth));
+    } else {
+      window.location.href = '/login';
+    }
+  });
+</script>
 </html>
