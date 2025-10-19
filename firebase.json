@@ -1,7 +1,11 @@
 {
   "hosting": {
     "public": "public",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
     "rewrites": [
       {
         "source": "/login",
@@ -10,6 +14,10 @@
       {
         "source": "/clients",
         "destination": "/modules/clients/index.html"
+      },
+      {
+        "source": "/projects",
+        "destination": "/modules/projects/index.html"
       },
       {
         "source": "**",
