@@ -1,4 +1,4 @@
-import { db } from '../../firebase-config.js';  // Adjust path if firebase-config.js is in root or public
+import { db } from '../../firebase-config.js';  // From public/modules/clients to public/
 import { collection, addDoc, getDocs } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
       await addDoc(collection(db, 'clients'), data);
       form.reset();
-      location.reload();  // Refresh list
+      location.reload();
     } catch (error) {
       console.error('Error adding client:', error);
       alert('Failed to add client. Check console.');
