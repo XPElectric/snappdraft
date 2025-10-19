@@ -12,7 +12,12 @@ const firebaseConfig = {
   measurementId: "G-PGKH45E1T1"
 };
 
-const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
-export const auth = getAuth(app);  // Export for modular use
-
+try {
+  const app = initializeApp(firebaseConfig);
+  export const db = getFirestore(app);
+  export const auth = getAuth(app);
+  console.log('Firebase initialized successfully');  // Debug log
+} catch (error) {
+  console.error('Firebase init failed:', error);  // Surface errors
+  throw error;
+}

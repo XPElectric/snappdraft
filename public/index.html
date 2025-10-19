@@ -15,26 +15,31 @@
   <hr class="my-8 border-gray-300">
   <div id="authStatus" class="mt-4"></div>  <!-- Dynamic logout area -->
   <script type="module">
-    import { auth } from './firebase-config.js';
-    import { signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
+  import { auth } from './firebase-config.js';
+  import { signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
 
-    // Immediate check: Redirect unauth users
-    onAuthStateChanged(auth, (user) => {
-      const statusDiv = document.getElementById('authStatus');
-      if (!user) {
-        console.log('Unauthenticated - redirecting to /login');
-        window.location.href = '/login';  // Instant JS redirect
-        return;
-      }
-      // Authenticated: Show logout and hide fallback meta
-      document.querySelector('meta[http-equiv="refresh"]').remove();
-      statusDiv.innerHTML = '<button id="logout" class="bg-red-500 text-white px-4 py-2 rounded">Logout</button>';
-      document.getElementById('logout').addEventListener('click', async () => {
-        await signOut(auth);
-        window.location.href = '/login';
-      });
-      console.log('Authenticated user loaded');
+  // Fallback timeout redirect (3s max wait)
+  const redirectTimer = setTimeout(() => {
+    window.location.href = '/login';
+  }, 3000);
+
+  onAuthStateChanged(auth, (user) => {
+    clearTimeout(redirectTimer);  // Cancel if auth resolves
+    const statusDiv = document.getElementById('authStatus');
+    if (!user) {
+      console.log('Unauthenticated - immediate redirect');
+      window.location.href = '/login';
+      return;
+    }
+    // Authenticated: Proceed
+    document.querySelector('meta[http-equiv="refresh"]').remove();
+    statusDiv.innerHTML = '<button id="logout" class="bg-red-500 text-white px-4 py-2 rounded">Logout</button>';  // Fixed class
+    document.getElementById('logout').addEventListener('click', async () => {
+      await signOut(auth);
+      window.location.href = '/login';
     });
-  </script>
+    console.log('Authenticated - guard passed');
+  });
+</script>
 </body>
 </html>
