@@ -5,6 +5,7 @@
   <title>Snappdraft - Electrical Estimating</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style> body { max-width: 1200px; margin: 0 auto; padding: 20px; } </style>  <!-- Desktop-only -->
+  <meta http-equiv="refresh" content="5;url=/login">  <!-- Fallback redirect if JS fails -->
 </head>
 <body class="bg-gray-100">
   <h1 class="text-3xl font-bold mb-4">Welcome to Snappdraft</h1>
@@ -12,20 +13,28 @@
   <p class="mb-4">Desktop-optimized for precise workflows on PCs and laptops.</p>
   <a href="/clients" class="bg-blue-500 text-white px-6 py-2 rounded text-lg">Manage Clients</a>
   <hr class="my-8 border-gray-300">
-  <script type="module"> console.log('Snappdraft landing loaded'); </script>
-</body>
-<!-- Add after <hr> in body -->
-<script type="module">
-  import { auth } from './firebase-config.js';
-  import { signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
+  <div id="authStatus" class="mt-4"></div>  <!-- Dynamic logout area -->
+  <script type="module">
+    import { auth } from './firebase-config.js';
+    import { signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      document.body.innerHTML += `<button id="logout" class="bg-red-500 text-white px-4 py-2 rounded ml-4">Logout</button>`;
-      document.getElementById('logout').addEventListener('click', () => signOut(auth));
-    } else {
-      window.location.href = '/login';
-    }
-  });
-</script>
+    // Immediate check: Redirect unauth users
+    onAuthStateChanged(auth, (user) => {
+      const statusDiv = document.getElementById('authStatus');
+      if (!user) {
+        console.log('Unauthenticated - redirecting to /login');
+        window.location.href = '/login';  // Instant JS redirect
+        return;
+      }
+      // Authenticated: Show logout and hide fallback meta
+      document.querySelector('meta[http-equiv="refresh"]').remove();
+      statusDiv.innerHTML = '<button id="logout" class="bg-red-500 text-white px-4 py-2 rounded">Logout</button>';
+      document.getElementById('logout').addEventListener('click', async () => {
+        await signOut(auth);
+        window.location.href = '/login';
+      });
+      console.log('Authenticated user loaded');
+    });
+  </script>
+</body>
 </html>
