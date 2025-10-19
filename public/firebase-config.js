@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
+import { getAuth } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';  // New: Auth import
 
 const firebaseConfig = {
   apiKey: "AIzaSyADn8XumdQHUB6eMVtjkxahqY_kFAtxCC8",  // Replace with your full config from console
@@ -12,8 +13,6 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-<<<<<<< HEAD
 export const db = getFirestore(app);
-=======
-export const db = getFirestore(app);
->>>>>>> 7ee0cccef36b7c55dda9d822b1f2d31a09fe9e9a
+export const auth = getAuth(app);  // Export for modular use
+

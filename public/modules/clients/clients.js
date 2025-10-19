@@ -1,6 +1,19 @@
 import { db } from '../../firebase-config.js';  // From public/modules/clients to public/
 import { collection, addDoc, getDocs } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js';
 
+import { auth } from '../../firebase-config.js';
+import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
+
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    window.location.href = '/login';
+  } else {
+    // Existing code here (load clients, etc.)
+    // ... (rest of your DOMContentLoaded block)
+  }
+});
+
+
 document.addEventListener('DOMContentLoaded', async () => {
   const form = document.getElementById('clientForm');
   const list = document.getElementById('clientList');
