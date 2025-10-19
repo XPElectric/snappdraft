@@ -46,6 +46,7 @@ const firebaseConfig = {
     const errorMsg = document.getElementById('errorMsg');
     let isSignup = false;
 
+    // Toggle mode
     signupBtn.addEventListener('click', () => {
       isSignup = !isSignup;
       submitBtn.textContent = isSignup ? 'Sign Up' : 'Login';
@@ -64,15 +65,21 @@ const firebaseConfig = {
         } else {
           await signInWithEmailAndPassword(auth, emailVal, passwordVal);
         }
-        window.location.href = '/dashboard';  // Redirect to app on success
+        console.log('Auth success - redirecting');  // Debug log
+        window.location.href = '/dashboard';
       } catch (error) {
+        console.error('Auth error:', error.code, error.message);  // Log for diagnosis
         errorMsg.textContent = error.message;
         errorMsg.classList.remove('hidden');
       }
     });
 
+    // Auto-redirect if already logged in
     onAuthStateChanged(auth, (user) => {
-      if (user) window.location.href = '/dashboard';
+      if (user) {
+        console.log('Already authenticated - redirecting');
+        window.location.href = '/dashboard';
+      }
     });
   </script>
 </body>
