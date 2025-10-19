@@ -10,8 +10,9 @@
       {
         "source": "**",
         "destination": "/index.html"
-      }
-      { "source": "/login", 
+      },
+      { 
+        "source": "/login", 
         "destination": "/modules/auth/index.html" 
       }
     ]
