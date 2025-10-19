@@ -38,6 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Auto-redirect if already logged in
   onAuthStateChanged(auth, (user) => {
-    if (user) window.location.href = '/';
+    if (user) window.location.href = '/dashboard';
   });
 });

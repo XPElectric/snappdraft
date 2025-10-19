@@ -18,27 +18,19 @@
   import { auth } from './firebase-config.js';
   import { signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
 
-  // Fallback timeout redirect (3s max wait)
-  const redirectTimer = setTimeout(() => {
-    window.location.href = '/login';
-  }, 3000);
-
   onAuthStateChanged(auth, (user) => {
-    clearTimeout(redirectTimer);  // Cancel if auth resolves
-    const statusDiv = document.getElementById('authStatus');
     if (!user) {
-      console.log('Unauthenticated - immediate redirect');
-      window.location.href = '/login';
+      window.location.href = '/login';  // Gate: Back to entry if unauth
       return;
     }
-    // Authenticated: Proceed
-    document.querySelector('meta[http-equiv="refresh"]').remove();
-    statusDiv.innerHTML = '<button id="logout" class="bg-red-500 text-white px-4 py-2 rounded">Logout</button>';  // Fixed class
+    // Authenticated: Show logout
+    const statusDiv = document.getElementById('authStatus');
+    statusDiv.innerHTML = '<button id="logout" class="bg-red-500 text-white px-4 py-2 rounded">Logout</button>';
     document.getElementById('logout').addEventListener('click', async () => {
       await signOut(auth);
       window.location.href = '/login';
     });
-    console.log('Authenticated - guard passed');
+    console.log('Dashboard loaded for authenticated user');
   });
 </script>
 </body>
